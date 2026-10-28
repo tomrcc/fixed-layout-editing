@@ -1,5 +1,6 @@
 ---
 import PageLayout from "../layouts/Page.astro";
+import FixedPageLayout from "../layouts/FixedPage.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 
 export interface Props {
@@ -19,4 +20,10 @@ export async function getStaticPaths() {
 const { page } = Astro.props;
 ---
 
-<PageLayout frontmatter={page.data} />
+{
+  "layout" in page.data && page.data.layout === "fixed" ? (
+    <FixedPageLayout frontmatter={page.data} />
+  ) : (
+    <PageLayout frontmatter={page.data} />
+  )
+}

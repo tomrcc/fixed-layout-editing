@@ -1,0 +1,38 @@
+---
+import Layout, { type SEOProps } from "./Layout.astro";
+import Hero from "../components/heroes/hero/hero.astro";
+import TextBlock from "../components/text-block/text-block.astro";
+import LeftRight from "../components/left-right/left-right.astro";
+
+type Props = {
+  frontmatter: {
+    title: string;
+    hero: any;
+    intro: any;
+    feature: any;
+    closing: any;
+    seo?: SEOProps;
+  };
+};
+
+// Section order lives here, not in content, so editors can't reorder, add or remove sections.
+const props = Astro.props.frontmatter;
+---
+
+<Layout {...props}>
+  <editable-component data-component="Hero" data-prop="hero">
+    <Hero {...props.hero} />
+  </editable-component>
+
+  <editable-component data-component="TextBlock" data-prop="intro">
+    <TextBlock {...props.intro} />
+  </editable-component>
+
+  <editable-component data-component="LeftRight" data-prop="feature">
+    <LeftRight {...props.feature} />
+  </editable-component>
+
+  <editable-component data-component="LeftRight" data-prop="closing">
+    <LeftRight {...props.closing} />
+  </editable-component>
+</Layout>

@@ -39,6 +39,16 @@ const pageSchema = z.object({
   seo: seoSchema,
 });
 
+const fixedPageSchema = z.object({
+  layout: z.literal("fixed"),
+  title: z.string(),
+  hero: z.any(),
+  intro: z.any(),
+  feature: z.any(),
+  closing: z.any(),
+  seo: seoSchema,
+});
+
 const paginatedCollectionSchema = z.object({
   title: z.string(),
   page_size: z.number().positive(),
@@ -47,7 +57,8 @@ const paginatedCollectionSchema = z.object({
 
 const pagesCollection = defineCollection({
   loader: glob({ pattern: '**/[^_]*.{md,astro}', base: "./src/content/pages" }),
-  schema: z.union([paginatedCollectionSchema, pageSchema]),
+  // fixedPageSchema goes first: pageSchema would match too and strip its section keys.
+  schema: z.union([fixedPageSchema, paginatedCollectionSchema, pageSchema]),
 });
 
 export const collections = {

@@ -24,6 +24,9 @@ collections_config:
       - name: Add New Page
         schema: default
         icon: pages
+      - name: Add Fixed Layout Page
+        schema: fixed
+        icon: view_agenda
     schemas:
       default:
         name: New Page
@@ -32,6 +35,10 @@ collections_config:
       paginated:
         name: Paginated collection
         path: '.cloudcannon/schemas/paginated.md'
+        remove_extra_inputs: false
+      fixed:
+        name: Fixed Layout Page
+        path: '.cloudcannon/schemas/fixed.md'
         remove_extra_inputs: false
       source_page:
         name: Source Editable Page
@@ -45,6 +52,45 @@ collections_config:
       title:
         type: text
         comment: Controls the metadata title for the page.
+      hero:
+        type: object
+        comment: The first section on a fixed layout page.
+        options:
+          preview:
+            icon: flag
+            text:
+              - key: heading
+              - Hero
+      intro:
+        type: object
+        comment: The text section below the hero.
+        options:
+          preview:
+            icon: article
+            text:
+              - key: heading
+              - Intro
+      feature:
+        type: object
+        comment: The first image and text section.
+        options:
+          preview:
+            icon: view_column_2
+            text:
+              - key: heading
+              - Feature
+      closing:
+        type: object
+        comment: The last image and text section.
+        options:
+          preview:
+            icon: view_column_2
+            text:
+              - key: heading
+              - Closing
+      flipped:
+        type: switch
+        comment: Shows the image on the left.
   blog:
     path: src/content/blog
     glob:
